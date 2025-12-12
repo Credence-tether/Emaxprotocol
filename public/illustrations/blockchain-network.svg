@@ -1,0 +1,214 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0c4a6e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e1b4b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="blockGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e3a8a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="nodeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#bgGradient)"/>
+  
+  <!-- Grid Pattern -->
+  <defs>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.1"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="400" fill="url(#grid)"/>
+  
+  <!-- Blockchain Blocks -->
+  <!-- Genesis Block -->
+  <g transform="translate(50, 180)">
+    <rect x="0" y="0" width="80" height="60" rx="8" fill="url(#blockGradient)" stroke="#3b82f6" stroke-width="2" filter="url(#glow)"/>
+    <text x="40" y="20" text-anchor="middle" fill="white" font-family="monospace" font-size="10" font-weight="bold">Genesis</text>
+    <text x="40" y="35" text-anchor="middle" fill="#93c5fd" font-family="monospace" font-size="8">Block #0</text>
+    <text x="40" y="50" text-anchor="middle" fill="#60a5fa" font-family="monospace" font-size="7">Hash: 0x000...</text>
+  </g>
+  
+  <!-- Block 1 -->
+  <g transform="translate(160, 180)">
+    <rect x="0" y="0" width="80" height="60" rx="8" fill="url(#blockGradient)" stroke="#10b981" stroke-width="2" filter="url(#glow)">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="40" y="20" text-anchor="middle" fill="white" font-family="monospace" font-size="10" font-weight="bold">Verified</text>
+    <text x="40" y="35" text-anchor="middle" fill="#34d399" font-family="monospace" font-size="8">Block #1</text>
+    <text x="40" y="50" text-anchor="middle" fill="#6ee7b7" font-family="monospace" font-size="7">Hash: 0x1a2...</text>
+  </g>
+  
+  <!-- Block 2 -->
+  <g transform="translate(270, 180)">
+    <rect x="0" y="0" width="80" height="60" rx="8" fill="url(#blockGradient)" stroke="#10b981" stroke-width="2" filter="url(#glow)">
+      <animate attributeName="opacity" values="1;0.8;1" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="40" y="20" text-anchor="middle" fill="white" font-family="monospace" font-size="10" font-weight="bold">Verified</text>
+    <text x="40" y="35" text-anchor="middle" fill="#34d399" font-family="monospace" font-size="8">Block #2</text>
+    <text x="40" y="50" text-anchor="middle" fill="#6ee7b7" font-family="monospace" font-size="7">Hash: 0x2b3...</text>
+  </g>
+  
+  <!-- Block 3 (Pending) -->
+  <g transform="translate(380, 180)">
+    <rect x="0" y="0" width="80" height="60" rx="8" fill="#374151" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,5" filter="url(#glow)">
+      <animate attributeName="stroke-dashoffset" values="0;10;0" dur="1s" repeatCount="indefinite"/>
+    </rect>
+    <text x="40" y="20" text-anchor="middle" fill="white" font-family="monospace" font-size="10" font-weight="bold">Pending</text>
+    <text x="40" y="35" text-anchor="middle" fill="#fbbf24" font-family="monospace" font-size="8">Block #3</text>
+    <text x="40" y="50" text-anchor="middle" fill="#fcd34d" font-family="monospace" font-size="7">Mining...</text>
+  </g>
+  
+  <!-- Block 4 (Mining) -->
+  <g transform="translate(490, 180)">
+    <rect x="0" y="0" width="80" height="60" rx="8" fill="#1f2937" stroke="#ef4444" stroke-width="2" stroke-dasharray="3,3" filter="url(#glow)">
+      <animate attributeName="stroke-dashoffset" values="0;6;0" dur="0.8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="40" y="20" text-anchor="middle" fill="white" font-family="monospace" font-size="10" font-weight="bold">Mining</text>
+    <text x="40" y="35" text-anchor="middle" fill="#f87171" font-family="monospace" font-size="8">Block #4</text>
+    <text x="40" y="50" text-anchor="middle" fill="#fca5a5" font-family="monospace" font-size="7">67% Done</text>
+  </g>
+  
+  <!-- Connection Lines between blocks -->
+  <g stroke="#3b82f6" stroke-width="3" fill="none">
+    <path d="M 130 210 L 160 210">
+      <animate attributeName="stroke-dasharray" values="0,30;30,0;0,30" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 240 210 L 270 210">
+      <animate attributeName="stroke-dasharray" values="0,30;30,0;0,30" dur="2.2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 350 210 L 380 210">
+      <animate attributeName="stroke-dasharray" values="0,30;30,0;0,30" dur="1.8s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 460 210 L 490 210">
+      <animate attributeName="stroke-dasharray" values="0,30;30,0;0,30" dur="1.5s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Network Nodes -->
+  <!-- Node 1 -->
+  <g transform="translate(100, 80)">
+    <circle cx="0" cy="0" r="20" fill="url(#nodeGradient)" stroke="#34d399" stroke-width="2" filter="url(#glow)">
+      <animate attributeName="r" values="20;25;20" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <text x="0" y="3" text-anchor="middle" fill="white" font-family="monospace" font-size="8" font-weight="bold">Node 1</text>
+  </g>
+  
+  <!-- Node 2 -->
+  <g transform="translate(300, 80)">
+    <circle cx="0" cy="0" r="20" fill="url(#nodeGradient)" stroke="#34d399" stroke-width="2" filter="url(#glow)">
+      <animate attributeName="r" values="20;25;20" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <text x="0" y="3" text-anchor="middle" fill="white" font-family="monospace" font-size="8" font-weight="bold">Node 2</text>
+  </g>
+  
+  <!-- Node 3 -->
+  <g transform="translate(500, 80)">
+    <circle cx="0" cy="0" r="20" fill="url(#nodeGradient)" stroke="#34d399" stroke-width="2" filter="url(#glow)">
+      <animate attributeName="r" values="20;25;20" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+    <text x="0" y="3" text-anchor="middle" fill="white" font-family="monospace" font-size="8" font-weight="bold">Node 3</text>
+  </g>
+  
+  <!-- Node 4 -->
+  <g transform="translate(200, 320)">
+    <circle cx="0" cy="0" r="20" fill="url(#nodeGradient)" stroke="#34d399" stroke-width="2" filter="url(#glow)">
+      <animate attributeName="r" values="20;25;20" dur="3.2s" repeatCount="indefinite"/>
+    </circle>
+    <text x="0" y="3" text-anchor="middle" fill="white" font-family="monospace" font-size="8" font-weight="bold">Node 4</text>
+  </g>
+  
+  <!-- Node 5 -->
+  <g transform="translate(400, 320)">
+    <circle cx="0" cy="0" r="20" fill="url(#nodeGradient)" stroke="#34d399" stroke-width="2" filter="url(#glow)">
+      <animate attributeName="r" values="20;25;20" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <text x="0" y="3" text-anchor="middle" fill="white" font-family="monospace" font-size="8" font-weight="bold">Node 5</text>
+  </g>
+  
+  <!-- Data Packets -->
+  <g>
+    <!-- Packet 1 -->
+    <circle cx="150" cy="130" r="3" fill="#fbbf24">
+      <animateMotion dur="4s" repeatCount="indefinite">
+        <path d="M 0,0 L 150,0 L 200,100 L 0,100 Z"/>
+      </animateMotion>
+    </circle>
+    
+    <!-- Packet 2 -->
+    <circle cx="350" cy="130" r="3" fill="#8b5cf6">
+      <animateMotion dur="5s" repeatCount="indefinite">
+        <path d="M 0,0 L -150,0 L -200,100 L 0,100 Z"/>
+      </animateMotion>
+    </circle>
+    
+    <!-- Packet 3 -->
+    <circle cx="300" cy="280" r="3" fill="#ef4444">
+      <animateMotion dur="3.5s" repeatCount="indefinite">
+        <path d="M 0,0 L 100,-100 L -100,-100 L 0,0 Z"/>
+      </animateMotion>
+    </circle>
+  </g>
+  
+  <!-- Network Connection Lines -->
+  <g stroke="#10b981" stroke-width="2" fill="none" opacity="0.6">
+    <!-- Nodes to Blockchain -->
+    <path d="M 100 100 L 200 180">
+      <animate attributeName="stroke-dasharray" values="0,10;10,0;0,10" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 300 100 L 310 180">
+      <animate attributeName="stroke-dasharray" values="0,10;10,0;0,10" dur="2.3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 500 100 L 420 180">
+      <animate attributeName="stroke-dasharray" values="0,10;10,0;0,10" dur="1.8s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 200 300 L 200 240">
+      <animate attributeName="stroke-dasharray" values="0,10;10,0;0,10" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 400 300 L 400 240">
+      <animate attributeName="stroke-dasharray" values="0,10;10,0;0,10" dur="2.1s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- Inter-node connections -->
+    <path d="M 120 80 L 280 80">
+      <animate attributeName="stroke-dasharray" values="0,15;15,0;0,15" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 320 80 L 480 80">
+      <animate attributeName="stroke-dasharray" values="0,15;15,0;0,15" dur="3.2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 220 320 L 380 320">
+      <animate attributeName="stroke-dasharray" values="0,15;15,0;0,15" dur="2.8s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Transaction Pool -->
+  <g transform="translate(50, 300)">
+    <rect x="0" y="0" width="120" height="50" rx="8" fill="#111827" fill-opacity="0.8" stroke="#374151"/>
+    <text x="60" y="20" text-anchor="middle" fill="#3b82f6" font-family="monospace" font-size="10" font-weight="bold">Transaction Pool</text>
+    <text x="60" y="35" text-anchor="middle" fill="#60a5fa" font-family="monospace" font-size="8">Pending: 1,247</text>
+    <text x="60" y="45" text-anchor="middle" fill="#93c5fd" font-family="monospace" font-size="8">Confirmed: 8,932</text>
+  </g>
+  
+  <!-- Network Statistics -->
+  <g transform="translate(430, 300)">
+    <rect x="0" y="0" width="140" height="70" rx="8" fill="#111827" fill-opacity="0.8" stroke="#374151"/>
+    <text x="70" y="15" text-anchor="middle" fill="#10b981" font-family="monospace" font-size="10" font-weight="bold">Network Stats</text>
+    <text x="70" y="30" text-anchor="middle" fill="#34d399" font-family="monospace" font-size="8">Hash Rate: 245 EH/s</text>
+    <text x="70" y="42" text-anchor="middle" fill="#6ee7b7" font-family="monospace" font-size="8">Difficulty: 25.05T</text>
+    <text x="70" y="54" text-anchor="middle" fill="#a7f3d0" font-family="monospace" font-size="8">Block Time: 10.2 min</text>
+    <text x="70" y="66" text-anchor="middle" fill="#d1fae5" font-family="monospace" font-size="8">Consensus: PoW</text>
+  </g>
+</svg>

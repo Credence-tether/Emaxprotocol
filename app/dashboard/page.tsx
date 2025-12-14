@@ -92,18 +92,30 @@ export default function DashboardHome() {
       setLoading(true)
       const user = await getCurrentUser()
       
+      console.log('Current user:', user)
+      
       if (!user) {
+        console.log('No user found, redirecting to login')
         router.push('/login')
         return
       }
 
       // Load user profile
+      console.log('Fetching user profile...')
       const profileResult = await getUserProfile()
+      console.log('Profile result:', profileResult)
+      
       if (profileResult?.data) {
+        console.log('Profile data found:', profileResult.data)
         setProfile(profileResult.data as UserProfile)
+      } else {
+        console.error('No profile data:', profileResult)
       }
 
-      if (!supabase) return
+      if (!supabase) {
+        console.error('Supabase client not available')
+        return
+      }
 
       // Load investments
       const { data: investmentsData } = await (supabase as any)
@@ -185,12 +197,46 @@ export default function DashboardHome() {
   if (!profile) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#0B1B33] to-[#1E3A8A] flex items-center justify-center p-4">
-        <Alert className="max-w-md bg-red-900/50 border-red-500">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription className="text-white">
-            Unable to load profile. Please refresh or contact support.
-          </AlertDescription>
-        </Alert>
+        <div className="max-w-2xl w-full space-y-6">
+          <Alert className="bg-red-900/50 border-red-500">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription className="text-white">
+              <strong>Unable to load your profile.</strong>
+              <br />
+              This usually means your database tables haven't been set up yet.
+            </AlertDescription>
+          </Alert>
+          
+          <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-lg p-6 space-y-4">
+            <h2 className="text-xl font-bold text-white">Setup Required</h2>
+            <p className="text-gray-300">
+              To use the dashboard, you need to set up your Supabase database tables. Follow these steps:
+            </p>
+            
+            <ol className="list-decimal list-inside space-y-2 text-gray-300">
+              <li>Go to your Supabase project dashboard</li>
+              <li>Navigate to SQL Editor</li>
+              <li>Copy and run the SQL from <code className="bg-black/30 px-2 py-1 rounded">SUPABASE_SETUP.md</code></li>
+              <li>Refresh this page</li>
+            </ol>
+            
+            <div className="flex gap-4 pt-4">
+              <Button 
+                onClick={() => window.location.reload()}
+                className="bg-cyan-500 hover:bg-cyan-600 text-white"
+              >
+                Refresh Page
+              </Button>
+              <Button 
+                onClick={() => router.push('/login')}
+                variant="outline"
+                className="border-white/20 text-white hover:bg-white/10"
+              >
+                Back to Login
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

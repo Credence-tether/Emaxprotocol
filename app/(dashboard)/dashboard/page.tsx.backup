@@ -1,3 +1,7 @@
+// Legacy backup retained intentionally. Route moved to /app/(dashboard)/page.tsx
+export default function LegacyDashboardBackup() {
+  return null
+}
 "use client"
 
 import { useState, useEffect } from 'react'

@@ -11,12 +11,7 @@ export default function HomePage() {
     <div className="pt-16">
       <section className="relative py-20 bg-gradient-to-br from-blue-50 to-indigo-100 overflow-hidden">
         {/* Background Image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-          style={{
-            backgroundImage: "url(/images/building-walls-hero.jpg)",
-          }}
-        />
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 bg-[url('/images/building-walls-hero.jpg')]" />
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/80 to-purple-700/80" />
 
         {/* Floating Trading Dashboard Illustration */}

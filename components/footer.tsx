@@ -43,6 +43,8 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-300 hover:text-white transition-colors"
+              aria-label="Facebook"
+              title="Facebook"
             >
               <Facebook size={24} />
             </a>
@@ -51,6 +53,8 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-300 hover:text-white transition-colors"
+              aria-label="Twitter"
+              title="Twitter"
             >
               <Twitter size={24} />
             </a>

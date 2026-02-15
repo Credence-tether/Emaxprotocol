@@ -9,14 +9,20 @@ import {
   ArrowUpFromLine,
   Settings,
   LogOut,
+  UserCheck,
+  Play,
+  CreditCard,
 } from 'lucide-react'
 import { signOut } from '@/lib/supabase'
 
 const navItems = [
   { href: '/dashboard', label: 'Overview', icon: LayoutDashboard },
+  { href: '/dashboard/kyc', label: 'KYC', icon: UserCheck },                 // New
   { href: '/dashboard/deposits', label: 'Deposits', icon: ArrowDownToLine },
   { href: '/dashboard/withdrawals', label: 'Withdrawals', icon: ArrowUpFromLine },
   { href: '/dashboard/investments', label: 'Investments', icon: Wallet },
+  { href: '/dashboard/activate-plan', label: 'Activate Plan', icon: Play }, // New
+  { href: '/dashboard/card', label: 'Card', icon: CreditCard },             // New
   { href: '/dashboard/settings', label: 'Settings', icon: Settings },
 ]
 
@@ -30,20 +36,28 @@ export default function Sidebar() {
       </div>
 
       <nav className="flex-1 px-4 space-y-2">
-        {navItems.map(({ href, label, icon: Icon }) => (
-          <Link
-            key={href}
-            href={href}
-            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition
-              ${pathname === href
-                ? 'bg-cyan-500/20 text-cyan-400'
-                : 'hover:bg-white/5 text-gray-300'}
-            `}
-          >
-            <Icon size={18} />
-            {label}
-          </Link>
-        ))}
+        {navItems.map(({ href, label, icon: Icon }) => {
+          // Optional: Example dynamic visibility logic
+          // Hide 'Activate Plan' if user hasn't completed KYC
+          // const showItem = label !== 'Activate Plan' || userHasKYCCompleted
+          // if (!showItem) return null
+
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition
+                ${pathname === href
+                  ? 'bg-cyan-500/20 text-cyan-400'
+                  : 'hover:bg-white/5 text-gray-300'}
+              `}
+              title={label} // Tooltip
+            >
+              <Icon size={18} />
+              {label}
+            </Link>
+          )
+        })}
       </nav>
 
       <button

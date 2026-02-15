@@ -120,7 +120,7 @@ export function LiveCryptoMarket() {
           </div>
           <div className="w-20 h-1 bg-green-500 mx-auto mb-4"></div>
           {lastUpdated && (
-            <div className="flex items-center justify-center gap-2 text-sm text-gray-600">
+          <div className="flex items-center justify-center gap-2 text-sm text-gray-600">
               <Clock className="w-4 h-4" />
               Last updated: {lastUpdated.toLocaleTimeString()}
             </div>

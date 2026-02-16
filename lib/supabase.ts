@@ -1,11 +1,16 @@
 "use client"
 
 import { createClient } from "@supabase/supabase-js";
-
+import { RealtimeChannel } from '@supabase/supabase-js'
 /* ================= ENV ================= */
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+/* ============== Upload file ============== */
+export async function uploadFile(bucket: string, path: string, file: File) {
+return await supabase.storage.from(bucket).upload(path, file)
+}
 
 /* ================= DATABASE TYPES ================= */
 
@@ -173,3 +178,48 @@ export function isSupabaseConfigured(): boolean {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   )
 }
+
+/* === List filesm ====== */
+export async function listFiles(bucket: string, path: string) {
+  return await supabase.storage.from(bucket).list(path)
+}
+
+/* Delete file */
+export async function deleteFile(bucket: string, path: string) {
+  return await supabase.storage.from(bucket).remove([path])
+}
+
+/* Get file public URL */
+export function getFileUrl(bucket: string, path: string): string {
+  const { data } = supabase.storage
+    .from(bucket)
+    .getPublicUrl(path)
+
+  return data.publicUrl
+}
+
+
+/* Subscribe to table changes */
+export function subscribeToTable(
+  table: string,
+  callback: (payload: any) => void
+): RealtimeChannel {
+  const channel = supabase
+    .channel(`realtime:${table}`)
+    .on(
+      'postgres_changes',
+      { event: '*', schema: 'public', table },
+      (payload) => {
+        callback(payload)
+      }
+    )
+    .subscribe()
+
+  return channel
+}
+
+// Unsubscribe
+export function unsubscribe(channel: RealtimeChannel) {
+  supabase.removeChannel(channel)
+}
+

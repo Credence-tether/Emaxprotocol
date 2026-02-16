@@ -114,26 +114,12 @@ export default function FileStorageManager() {
 
       const filePath = `${user.id}/${fileName}`
       
-      // For public buckets like avatars, we can use the public URL
-      if (selectedBucket === 'avatars') {
-        const url = getFileUrl(selectedBucket, filePath)
-        window.open(url, '_blank')
-      } else {
-        // For private buckets, download the file
-        const { downloadFile } = await import('@/lib/supabase')
-        const { data, error } = await downloadFile(selectedBucket, filePath)
-
-        if (error) {
-          alert('Download failed: ' + error.message)
-        } else if (data) {
-          const url = URL.createObjectURL(data)
-          const a = document.createElement('a')
-          a.href = url
-          a.download = fileName.split('_').slice(1).join('_') // Remove timestamp prefix
-          a.click()
-          URL.revokeObjectURL(url)
-        }
-      }
+      // Use the public URL to download the file
+      const url = getFileUrl(selectedBucket, filePath)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = fileName.split('_').slice(1).join('_') // Remove timestamp prefix
+      a.click()
     } catch (error: any) {
       alert('Download error: ' + error.message)
     }
